@@ -1,18 +1,22 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../databases/conecta.js";
 
-export const Especialista = sequelize.define("especialista", {
+export const Specialist = sequelize.define("specialist", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  nome: {
-    type: DataTypes.STRING(40),
+  name: {
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
-  crm: {
-    type: DataTypes.STRING(20),
+  email: {
+    type: DataTypes.STRING(100),
+    allowNull: false,
+  },
+  password: {
+    type: DataTypes.STRING(60),
     allowNull: false,
   },
 });
