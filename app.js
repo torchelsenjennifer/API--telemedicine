@@ -3,6 +3,10 @@ import cors from "cors";
 import routes from "./routes.js";
 
 import { sequelize } from "./databases/conecta.js";
+import { Patient } from "./models/Patient.js";
+import { Specialist } from "./models/Specialist.js";
+import { Administrator } from "./models/Administrator.js";
+import { Appointment } from "./models/Appointment.js";
 
 const app = express();
 const port = 3000;
@@ -14,6 +18,12 @@ app.use(routes);
 async function conecta_db() {
   try {
     await sequelize.authenticate();
+
+    await Patient.sync();
+    await Specialist.sync();
+    await Administrator.sync();
+    await Appointment.sync();
+
     console.log("Conexao com banco de dados realizada com sucesso");
   } catch (error) {
     console.error("Erro na conexao com o banco: ", error);

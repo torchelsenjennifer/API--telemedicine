@@ -3,7 +3,7 @@ import { sequelize } from "../databases/conecta.js";
 import { Patient } from "./Patient.js";
 import { Specialist } from "./Specialist.js";
 
-export const Query = sequelize.define("query", {
+export const Appointment = sequelize.define("appointment", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -28,7 +28,7 @@ export const Query = sequelize.define("query", {
 });
 
 //Uma consulta pertence a um paciente
-Query.belongsTo(Patient, {
+Appointment.belongsTo(Patient, {
   foreignKey: {
     name: "patient_id",
     allowNull: false,
@@ -37,13 +37,13 @@ Query.belongsTo(Patient, {
   onUpdate: "CASCADE",
 });
 
-//um paciente pode pertencer a varias consultas
-Patient.hasMany(Query, {
+//um paciente tem muitas consultas
+Patient.hasMany(Appointment, {
   foreignKey: "patient_id",
 });
 
-//uma consulta é realizada por um especialista
-Query.belongsTo(Specialist, {
+//uma consulta pertence a especialista
+Appointment.belongsTo(Specialist, {
   foreignKey: {
     name: "specialist_id",
     allowNull: false,
@@ -52,7 +52,7 @@ Query.belongsTo(Specialist, {
   onUpdate: "CASCADE",
 });
 
-// um especialista pode ter varias consultas
-Specialist.hasMany(Query, {
-  foreignKey: "patient_id",
+// um especialista tem muitas consultas
+Specialist.hasMany(Appointment, {
+  foreignKey: "specialist_id",
 });
