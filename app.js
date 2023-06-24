@@ -7,6 +7,7 @@ import { Patient } from "./models/Patient.js";
 import { Specialist } from "./models/Specialist.js";
 import { Administrator } from "./models/Administrator.js";
 import { Appointment } from "./models/Appointment.js";
+import { Log } from "./models/Log.js";
 
 const app = express();
 const port = 3000;
@@ -23,6 +24,7 @@ async function conecta_db() {
     await Patient.sync();
     await Specialist.sync();
     await Appointment.sync();
+	await Log.sync();
 
     console.log("Conexao com banco de dados realizada com sucesso");
   } catch (error) {

@@ -21,6 +21,8 @@ export const Appointment = sequelize.define("appointment", {
     type: DataTypes.STRING(20),
     allowNull: false,
   },
+},{
+	paranoid: true
 });
 
 //Uma consulta pertence a um paciente
