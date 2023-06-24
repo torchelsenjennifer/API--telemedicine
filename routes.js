@@ -3,6 +3,8 @@ import { administratorCreate, administratorIndex } from "./controllers/administr
 import { patientCreate, patientIndex } from "./controllers/patientController.js"
 import { specialistCreate, specialistIndex } from "./controllers/specialistController.js"
 import { appointmentCreate, appointmentDestroy, appointmentIndex } from "./controllers/appointmentController.js"
+import { verificaLogin } from "./middlewares/verificaLogin.js"
+import { loginPatient } from "./controllers/loginController.js"
 
 const router = Router()
 
@@ -17,6 +19,8 @@ router.get('/specialist', specialistIndex)
 
 router.get('/appointment', appointmentIndex)
 	  .post('/appointment', appointmentCreate)
-	  .delete('/appointment/:id', appointmentDestroy)
+	  .delete('/appointment/:id', verificaLogin, appointmentDestroy)
+
+router.get('/loginUsuario', loginPatient)
 
 export default router

@@ -37,18 +37,22 @@ export const appointmentCreate = async (req, res) => {
 
 export const appointmentDestroy = async (req, res) => {
 	const { id } = req.params;
-	//todo: recebir o id paciente logado
-	const patient_id = 1;
-
+	const patient_id = req.user_logado_id;
 	try{
-		await Appointment.destroy({where: { id } });
-
+		//o paciente logado precisa ser o dono da consulta marcada para poder desmarcar
+		const deletado = await Appointment.destroy({where: { id, patient_id } });
+		if (!deletado){
+			await Log.create({
+				descricao: `O Paciente de id ${patient_id} tentontou desmarcar a consulta de id ${id} e foi impedido pelo sistema`
+			})
+			return res.status(400).json({ msg: "Nao foi possivel excluir!"})
+		}
 		//regista se paciente desmarco a consulta
 		await Log.create({
 			descricao: `O Paciente de id ${patient_id} desmarcou a consulta de id ${id}`
 		})
 
-		res.status(200).json({ msg: "Ok! Removido com Sucesso"})
+		res.status(200).json({ msg: "Ok! Consulta Desmarcada com Sucesso"})
 	} catch (error) {
 		res.status(400).send(error)
 	}
