@@ -11,6 +11,10 @@ export const Specialist = sequelize.define("specialist", {
     type: DataTypes.STRING(100),
     allowNull: false,
   },
+  role: {
+    type: DataTypes.STRING(60),
+    allowNull: false,
+  },
   email: {
     type: DataTypes.STRING(100),
     allowNull: false,

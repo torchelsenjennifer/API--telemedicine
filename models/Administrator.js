@@ -12,23 +12,31 @@ export const Administrator = sequelize.define("administrator", {
     type: DataTypes.STRING(40),
     allowNull: false,
   },
-  cargo: {
+  role: {
     type: DataTypes.STRING(20),
+    allowNull: false,
+  },
+  email: {
+    type: DataTypes.STRING(100),
+    allowNull: false,
+  },
+  password: {
+    type: DataTypes.STRING(60),
     allowNull: false,
   },
 });
 
-//Um administrador pertence a um especialista
-Administrator.belongsTo(Specialist, {
+//Um especialista pertence a um administrador
+Specialist.belongsTo(Administrator, {
   foreignKey: {
-    name: "specialist_id",
+    name: "administrator_id",
     allowNull: false,
   },
   onDelete: "RESTRICT",
   onUpdate: "CASCADE",
 });
 
-//um especialista tem vários administrador
-Specialist.hasMany(Administrator, {
-  foreignKey: "specialist_id",
+//um adminsitardor tem vários especialista
+Administrator.hasMany(Specialist, {
+  foreignKey: "administrator_id",
 });

@@ -9,12 +9,8 @@ export const Appointment = sequelize.define("appointment", {
     primaryKey: true,
     autoIncrement: true,
   },
-  day: {
-    type: DataTypes.STRING(40),
-    allowNull: false,
-  },
-  time: {
-    type: DataTypes.STRING(20),
+  appointment_Date: {
+    type: DataTypes.DATE,
     allowNull: false,
   },
   modality: {

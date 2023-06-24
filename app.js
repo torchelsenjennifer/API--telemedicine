@@ -19,9 +19,9 @@ async function conecta_db() {
   try {
     await sequelize.authenticate();
 
+    await Administrator.sync();
     await Patient.sync();
     await Specialist.sync();
-    await Administrator.sync();
     await Appointment.sync();
 
     console.log("Conexao com banco de dados realizada com sucesso");
