@@ -20,7 +20,7 @@ async function conecta_db() {
   try {
     await sequelize.authenticate();
 
-    await Administrator.sync();
+    await Administrator.sync({alter: true});
     await Patient.sync();
     await Specialist.sync();
     await Appointment.sync();

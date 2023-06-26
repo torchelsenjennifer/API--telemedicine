@@ -12,6 +12,10 @@ export const Appointment = sequelize.define("appointment", {
   appointment_Date: {
     type: DataTypes.DATE,
     allowNull: false,
+	get() {
+		const rawValue = this.getDataValue('appointment_Date');
+		return new Date(rawValue).toLocaleString();
+	  }
   },
   modality: {
     type: DataTypes.STRING(20),

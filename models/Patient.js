@@ -32,3 +32,9 @@ Patient.beforeCreate((patient) => {
 	const hash = brcryp.hashSync(patient.password, salt)
 	patient.password = hash
 });
+
+Patient.beforeUpdate((patient) => {
+	const salt = brcryp.genSaltSync(12)
+	const hash = brcryp.hashSync(patient.password, salt)
+	patient.password = hash
+});

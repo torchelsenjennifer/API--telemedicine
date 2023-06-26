@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../databases/conecta.js";
 import { Specialist } from "./Specialist.js";
+import brcryp from 'bcrypt'
 
 export const Administrator = sequelize.define("administrator", {
   id: {
@@ -19,11 +20,18 @@ export const Administrator = sequelize.define("administrator", {
   email: {
     type: DataTypes.STRING(100),
     allowNull: false,
+	unique: true,
   },
   password: {
     type: DataTypes.STRING(60),
     allowNull: false,
   },
+});
+
+Administrator.beforeCreate((administrador) => {
+	const salt = brcryp.genSaltSync(12)
+	const hash = brcryp.hashSync(administrador.password, salt)
+	administrador.password = hash
 });
 
 //Um especialista pertence a um administrador

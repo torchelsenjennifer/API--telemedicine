@@ -7,7 +7,6 @@ export const verificaLoginPatient = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1]
     const decode = jwt.verify(token, process.env.JWT_KEY)
-//    console.log(decode)
     req.user_logado_id = decode.user_logado_id
     req.user_logado_nome = decode.user_logado_nome
     next()

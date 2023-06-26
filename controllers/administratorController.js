@@ -20,7 +20,15 @@ export const administratorCreate = async (req, res) => {
     });
     return;
   }
+
   try {
+	const hasAdm = await Administrator.findOne({ where: { email } })
+	if(hasAdm){
+		return res.status(400).json({
+			id: 0,
+			msg: "Erro... Email cadastrado.",
+		  });
+	}
     const administrator = await Administrator.create({
       name,
       role,

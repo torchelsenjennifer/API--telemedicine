@@ -86,7 +86,7 @@ export const loginAdmin = async (req, res) => {
           user_logado_id: adm.id,
           user_logado_nome: adm.nome,
         },
-        process.env.JWT_KEY,
+        process.env.JWT_ADIM_KEY,
         { expiresIn: "1h" }
       );
 
