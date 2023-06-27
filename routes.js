@@ -1,6 +1,6 @@
 import { Router } from "express"
-import { administratorCreate, administratorIndex } from "./controllers/administratorController.js"
-import { patientCreate, patientIndex } from "./controllers/patientController.js"
+import { administratorAlterPassword, administratorCreate, administratorIndex } from "./controllers/administratorController.js"
+import { patientAlterPassword, patientCreate, patientIndex } from "./controllers/patientController.js"
 import { specialistCreate, specialistIndex } from "./controllers/specialistController.js"
 import { appointmentAlter, appointmentCreate, appointmentDestroy, appointmentIndex, appointmentPesq } from "./controllers/appointmentController.js"
 import { loginAdmin, loginPatient } from "./controllers/loginController.js"
@@ -12,11 +12,11 @@ const router = Router()
 
 router.get('/administrator', verificaLoginAdm, administratorIndex)
       .post('/administrator', verificaLoginAdm, administratorCreate)
-	//   .put('/administrator/alter/:id', )
+	  .put('/administrator/alter', administratorAlterPassword  )
 
 router.get('/patient', verificaLoginAdm, patientIndex)
       .post('/patient', verificaLoginPatient, patientCreate)
-	//   .put('/patient/alter/:id', patientAlter )
+	  .put('/patient/alter', patientAlterPassword )
 
 router.get('/specialist', verificaLoginPatient, verificaLoginAdm, specialistIndex)
       .post('/specialist', verificaLoginAdm , specialistCreate)
