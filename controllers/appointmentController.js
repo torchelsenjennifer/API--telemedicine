@@ -63,8 +63,7 @@ export const appointmentDestroy = async (req, res) => {
 
 export const appointmentAlter = async (req, res) => {
   const { id } = req.params;
-  const { appointment_Date, modality, address, patient_id, specialist_id } =
-    req.body;
+  const { appointment_Date, modality, address, patient_id, specialist_id } = req.body;
 
   if (!appointment_Date || !modality || !address || !patient_id || !specialist_id) {
     res.status(400).json({
@@ -87,7 +86,7 @@ export const appointmentAlter = async (req, res) => {
         where: { id },
       }
     );
-    res.status(200).json(appointment);
+    res.status(200).json({ msg: "Ok! Alterado" });
   } catch (error) {
     res.status(400).send(error);
   }

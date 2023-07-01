@@ -6,7 +6,7 @@ import { appointmentAlter, appointmentCreate, appointmentDestroy, appointmentInd
 import { loginAdmin, loginPatient } from "./controllers/loginController.js"
 import { verificaLoginPatient } from "./middlewares/verificaLoginPatient.js"
 import { verificaLoginAdm } from "./middlewares/verificaLoginAdm.js"
-
+import { sendEmail } from "./controllers/mailController.js"
 
 const router = Router()
 
@@ -15,10 +15,10 @@ router.get('/administrator', verificaLoginAdm, administratorIndex)
 	  .put('/administrator/alter', administratorAlterPassword  )
 
 router.get('/patient', verificaLoginAdm, patientIndex)
-      .post('/patient', verificaLoginPatient, patientCreate)
+      .post('/patient', patientCreate)
 	  .put('/patient/alter', patientAlterPassword )
 
-router.get('/specialist', verificaLoginPatient, verificaLoginAdm, specialistIndex)
+router.get('/specialist', specialistIndex)
       .post('/specialist', verificaLoginAdm , specialistCreate)
 
 router.get('/appointment', verificaLoginPatient, appointmentIndex)
@@ -31,6 +31,6 @@ router.get('/loginUsuario/patient', loginPatient)
 
 router.get('/loginUsuario/adm', loginAdmin)
 
-
+router.get('/sendEmail/alter', sendEmail)
 
 export default router
